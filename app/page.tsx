@@ -1,88 +1,41 @@
-// Name: Heer Kacchia
-// Date: 26,June 2026
-// Description: Main page for New Generation High School Student Portal.This file connects all components together and manages the student list.
-
 "use client";
  
-// useState lets us store data that updates the screen when it changes
 import { useState } from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import StudentList from "../components/StudentList";
-import AddStudentForm from "../components/AddStudentForm"; 
-import initialStudents from "../data/students.json";
-import { validateStudentData } from "../utils/validation";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
+import StudentList from "@/components/StudentList";
+import AddStudentForm from "@/components/AddStudentForm";
+import studentsData from "@/data/students.json";
  
-export default function Home() {
-  const [students, setStudents] = useState(initialStudents);
-  const [errors, setErrors] = useState({});
+type Student = {
+  firstName: string;
+  lastName: string;
+  dob: string;
+  grade: string;
+};
  
-  // This function runs when the user clicks "Add Student"
-  function handleAddStudent(event) {
-  // Stop the page from refreshing (default form behaviour)
-    event.preventDefault();
-    // Read each field value from the form using its "name" attribute
-    const form = event.target;
-    const newStudent = {
-
-      firstName: form.firstName.value,
-      lastName:  form.lastName.value,
-      dob:       form.dob.value,
-      grade:     form.grade.value,
+export default function Page() {
+ // Force TypeScript to map the initial JSON to your expected type array
+const [students, setStudents] = useState<Student[]>(studentsData as unknown as Student[]);
+ 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+ 
+    const form = new FormData(e.currentTarget);
+ 
+    const newStudent: Student = {
+      firstName: form.get("firstName") as string,
+      lastName: form.get("lastName") as string,
+      dob: form.get("dob") as string,
+      grade: form.get("grade") as string,
     };
  
-    const result = validateStudentData(newStudent);
- 
-    // If there are errors, show them and stop here — don't add the student
-    if (!result.isValid) {
-
-      setErrors(result.errors);
+    if (!newStudent.firstName || !newStudent.lastName || !newStudent.dob || !newStudent.grade) {
+      alert("Please fill in all fields.");
       return;
     }
  
-    // No errors — clear old error messages
-    setErrors({});
- 
-    // Add the new student to the list
-    const [students, setStudents] = useState<Student[]>(initialStudents as Student[]);
- 
-    // Clear the form fields after a successful submission
-    form.reset();
-  }
- 
-  // What gets displayed on the screen
-  return (
-<main>
- 
-      {/* Top navigation bar */}
-<Navbar />
- 
-      {/* Main content area — centred with a max width */}
-<div style={styles.container}>
- 
-        {/* Show all students — we pass the students array down as a prop */}
-<StudentList students={students} />
- 
-        {/* Show the add-student form — we pass the submit handler and errors as props */}
-<AddStudentForm onSubmit={handleAddStudent} errors={errors} />
- 
-      </div>
-
-      {/* Bottom footer */}
-<Footer />
-    </main>
-  );
+    setStudents([...students, newStudent]);
+    e.currentTarget.reset();
+  };
 }
- 
-// Basic layout styles
-
-const styles = {
-  container: {
-    maxWidth: "800px", 
-    margin: "0 auto",   
-    padding: "20px",
-
-  },
-
-};
- 
