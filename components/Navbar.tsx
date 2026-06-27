@@ -1,3 +1,4 @@
+//Ayotomiwa Bakare
 export default function Navbar() {
   return (
     <nav style={styles.nav}>
@@ -5,14 +6,14 @@ export default function Navbar() {
     </nav>
   );
 }
-
+ 
 const styles = {
   nav: {
     width: "100%",
     padding: "20px",
     backgroundColor: "#1E3A8A",
     color: "white",
-    textAlign: "center",
+    textAlign: "center" as const,
   },
   title: {
     margin: 0,
@@ -20,3 +21,4 @@ const styles = {
     fontWeight: "bold",
   },
 };
+ 
