@@ -79,8 +79,8 @@ export default function Home() {
 
 const styles = {
   container: {
-    maxWidth: "800px",  // Don't stretch too wide on big screens
-    margin: "0 auto",   // Centre the content horizontally
+    maxWidth: "800px", 
+    margin: "0 auto",   
     padding: "20px",
 
   },
