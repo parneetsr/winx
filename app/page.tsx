@@ -31,7 +31,6 @@ export default function Home() {
       grade:     form.grade.value,
     };
  
-    // Run Person A's validation to check if the data is correct
     const result = validateStudentData(newStudent);
  
     // If there are errors, show them and stop here — don't add the student
