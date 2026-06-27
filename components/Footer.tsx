@@ -1,3 +1,4 @@
+//Ayotomiwa Bakare
 export default function Footer() {
   return (
     <footer style={styles.footer}>
@@ -6,13 +7,13 @@ export default function Footer() {
     </footer>
   );
 }
-
+ 
 const styles = {
   footer: {
     marginTop: "40px",
     padding: "20px",
     backgroundColor: "#1E3A8A",
     color: "white",
-    textAlign: "center",
+    textAlign: "center" as const,
   },
 };
