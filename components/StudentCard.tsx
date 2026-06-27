@@ -1,4 +1,12 @@
-export default function StudentCard({ student }) {
+//Ayotomiwa Bakare
+type Student = {
+  firstName: string;
+  lastName: string;
+  dob: string;
+  grade: string;
+};
+ 
+export default function StudentCard({ student }: { student: Student }) {
   return (
     <div style={styles.card}>
       <h3>{student.firstName} {student.lastName}</h3>
@@ -7,7 +15,7 @@ export default function StudentCard({ student }) {
     </div>
   );
 }
-
+ 
 const styles = {
   card: {
     border: "1px solid #ccc",
