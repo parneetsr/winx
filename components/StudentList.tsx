@@ -1,6 +1,14 @@
+//Ayotomiwa Bakare
 import StudentCard from "./StudentCard";
-
-export default function StudentList({ students }) {
+ 
+type Student = {
+  firstName: string;
+  lastName: string;
+  dob: string;
+  grade: string;
+};
+ 
+export default function StudentList({ students }: { students: Student[] }) {
   return (
     <div>
       <h2>Student List</h2>
